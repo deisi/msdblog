@@ -4,6 +4,7 @@ date: 2020-02-04T12:47:36+01:00
 draft: false
 tags: ["Security", "HowTo"]
 images: ["/easyrsa/easy_rsa.png"]
+description: "Easy RSA to administrate a local CA"
 ---
 
 ![img](/easyrsa/easy_rsa.png)
