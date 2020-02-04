@@ -4,6 +4,7 @@ title = "Deisi Blog"
 theme = "kiss"
 Paginate = 5 # Number of posts per page
 enableRobotsTXT = true
+copyright = ""
 
 [params.rss] # Adding this tag enables RSS feed
 includeContent = true # Includes whole content in rss
