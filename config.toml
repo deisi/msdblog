@@ -1,10 +1,9 @@
-baseURL = "https://msdblog.de"
+baseURL = "https://deisi.github.io"
 languageCode = "de"
-title = "MSD Blog"
+title = "Deisi Blog"
 theme = "kiss"
 Paginate = 5 # Number of posts per page
 enableRobotsTXT = true
-copyright = "&copy; <a href=\"https://github.com/deisi\">Malte Deiseroth</a> 2020"
 
 [params.rss] # Adding this tag enables RSS feed
 includeContent = true # Includes whole content in rss
@@ -12,7 +11,7 @@ authorName = "Malte Deiseroth" # Author full name
 authorEmail = "mdeiseroth88@gmail.com" # Author email
 
 [params.info]
-homeTitle = "MSDBlog" # Title for home page
+homeTitle = "Deisi Blog" # Title for home page
 poweredby = true # Adds powered by hugo and kiss below Copyright
 related = true # Includes related articles at the bottom of the article
 codeCopy = true # Add copy button above code blocks
@@ -26,7 +25,7 @@ rss = "index.xml" # Add this to show RSS button in social.
 platforms = ["github","email", "rss"]
 
 [params.sections_right]
-"https://msdblog.de/about" = "About/Impressum/Datenschutz"
+"https://deisi.github.io/about" = "About/Impressum/Datenschutz"
 
 [taxonomies]
 tag ="tags"
