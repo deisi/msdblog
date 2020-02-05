@@ -5,6 +5,17 @@ theme = "kiss"
 Paginate = 5 # Number of posts per page
 enableRobotsTXT = true
 copyright = ""
+disqusShortname = "deisiblog"
+googleAnalytics = "UA-132030316-2"
+
+[privacy]
+  [privacy.disqus]
+    disable = false
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    disable = false
+    respectDoNotTrack = true
+    useSessionStorage = true
 
 [params.rss] # Adding this tag enables RSS feed
 includeContent = true # Includes whole content in rss
@@ -16,6 +27,9 @@ homeTitle = "Deisi Blog" # Title for home page
 poweredby = true # Adds powered by hugo and kiss below Copyright
 related = true # Includes related articles at the bottom of the article
 codeCopy = true # Add copy button above code blocks
+
+[params.features]
+disqusOnDemand = true  # Load Disqus comments on click
 
 [params.social]
 github = "deisi"
