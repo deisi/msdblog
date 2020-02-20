@@ -1,6 +1,6 @@
 ---
 title: "DSGVO mit Disqus und GoogleAnalytics"
-date: 2020-02-18T08:00:00+01:00
+date: 2020-02-19T08:00:00+01:00
 draft: true
 tags: ["HowTo"]
 ---
