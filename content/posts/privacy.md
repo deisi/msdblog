@@ -25,5 +25,8 @@ ich benutze folgende `config.toml` für den Blog.
     useSessionStorage = tru
 ```
 
+EDIT: Inzwischen habe ich https://staticman.net/docs/ gefunden. Ich denke das
+werde ich bald mal umsetzen.
+
 ## Quellen
 https://gohugo.io/about/hugo-and-gdpr/
