@@ -1,7 +1,9 @@
 ---
 title: "Verschlüsselung mittels PLZ bei einer Bank!?!"
-date: 2020-02-25T08:30:00+01:00
-draft: true
+date: 2020-02-28T08:30:00+01:00
+tags: ["Security"]
+description: "Banken verschlüsseln mit PLZ..."
+
 ---
 
 Ich habe gerade ein Konto bei einer großen deutschen online Bank eröffnet und
@@ -20,7 +22,7 @@ Verschlüsselung quasi mit Passwort in der selben Mail. Welches Genie war den
 hier am Werk?
 
 Hier wurde auf ganzer Linie nicht verstanden was die Rolle von Verschlüsselung
-beim Thema Sicherheit ist. Der Bank muss bewusst sein, das Emails nicht sicher
+beim Thema Sicherheit ist. Der Bank muss bewusst sein, das e-mails nicht Sicher
 sind. Darum auch die Verschlüsselung, aber warum dann mit einer 5 stelligen Zahl
 bei einem angehängten PDF? Das sind, stellen wir uns mal doof, gerade mal
 100.000 Kombinationsmöglichkeiten. Als echt arme Hacker leisten wir uns nur
