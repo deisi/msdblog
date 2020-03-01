@@ -1,6 +1,6 @@
 ---
 title: "LUKS mit Yubikey"
-date: 2020-03-03T08:00:00+01:00
+date: 2020-03-07T08:00:00+01:00
 draft: true
 tags: ["Security", "HowTo"]
 description: "Festplatten verschlüsselung mit Yubikeys unter Ubuntu"

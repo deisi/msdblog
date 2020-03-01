@@ -1,50 +1,102 @@
 ---
-title: "Papierloses_buero"
-date: 2020-03-10T08:00:00+01:00
+title: "Papierloses Büro"
+date: 2020-03-14T08:00:00+01:00
 draft: true
 tags: ["HowTo", "Linux"]
 ---
 
-# Papierloses Büro
+Papier ist soooo 20. Jahrhundert! Darum will ich so wenig wie möglich auf Papier
+haben. Ich scanne lieber alles hirnlos ein und speichere es auf meinen
+Festplatten. Damit ich das ganze später auch halbwegs sinnvoll benutzen kann,
+müssen die Dokumente aber durchsuchbar sein. Ansonsten hätte man, gegenüber dem
+einheften, nichts gewonnen. Mittel **O**ptical **C**haracter **R**ecognition
+(OCR) ist das möglich. Hier werden gedruckte Buchstaben erkannt und aus dem Scan
+wird ein durchsuchbarer Scan. Der OpenSource-Branchen-Primus ist wohl
+[Tesseract](https://github.com/tesseract-ocr/tesseract). Tesseract ist aber eher
+ein backend und nicht wirklich einfach zu benutzen. Aus diesem Grund verwende
+ich [Ocrmypdf](https://github.com/jbarlow83/OCRmyPDF). Als Pythonanwendung hat
+Ocrmypdf natürlich gleich einen Bonus in meinem Herzen und auch einen Commit ;).
 
-Um möglichst wenig Papierkram behalten zu müssen habe ich mir ein **O**ptical
-**C**haracter **R**ecognition (OCR) System aufgesetzt. Ein OCR erlaubt es, dass
-eingescante Documente durchsuchbar werden. Im wesentlichen, werden die
-Buchstaben erkannt und eingelesen. Im neudeutsch würde man das wohl ins
-Kerngebiet einer künstlichen Intelligenz (KI) einordnen, aber das hier zu Grunde
-liegende Programm *Tesseract* ist fast schon Uralt.
+Am Ende des Tutorials haben wir folgendes Setup:
 
-Im wesentlichen braucht es zwei Dinge. Einen Netzwerkfähigen Scanner, am besten
-mit Papiereinzug und einen Server. Der Scanner wird angewiesen alles auf dem
-Server zu speichern. Ich verwende
-[Ocrmypdf](https://github.com/jbarlow83/OCRmyPDF), da es die eingescannten pdfs
-quasi unverändert lässt, diese aber durchsuchbar macht.
-
+![img](/ocrmypdf/ocrmypdf.svg)
 
 # 1. Schritt: Scanner einrichten.
 Hier kann ich nicht wirklich helfen, aber ich habe es so gemacht, dass der
 Scanner auf eine SMB Festplatte im Netzwerk speichert. Mein Scanner erlaubt das.
-Hier muss man gegebenenfalls bei der Hardware Auswahl aufpassen. Auch ein
-Papiereinzug ist empfehlenswert, da jede Seite einzeln Scannen nicht viel Spaß
-macht.
+Hier muss man gegebenenfalls bei der Hardwareauswahl aufpassen. Ein Papiereinzug
+sollte vorhanden sein, da das scannen so schon nervig genug ist.
 
-# 2. Schritt: Ocrmypdf Installieren.
+# 2. Schritt: Ocrmypdf installieren.
+Ich benutze den offiziellen
+[Dockercontainer](https://hub.docker.com/r/jbarlow83/ocrmypdf/). Ein Vorteil des
+Dockercontainers ist, dass er bereits mit einem `watcher` Script ausgestattet
+ist. Dieses Script ermöglicht es einem den Inhalt eines Ordners zu überwachen
+und sobald ein neuer Scan im Ordner erscheint, wird automatisch *ocrmypdf*
+aktiviert und eine durchsuchbare Version erstellt. Wir brauchen also erst mal
+*docker* und *docker-compose*:
 
-Da ich sowieso viele Docker container verwende und es hier bereits einen gut
-konfigurierten container. Ein weiterer Vorteil des Containers ist, dass er
-bereits den *watcher.py* enthält. Der *watcher.py* ist ein script, dass den
-Inhalt eines Ordners laufend beobachtet und sobald sich etwas ändert, ein neuer
-scan, wird ocrmypdf aktiviert und erstellt durchsuchbare versionen der pdfs.
+``` bash
+sudo apt install docker docker-compose
+```
+Jetzt fehlt uns noch ocrmypdf. Das können wir mit *docker-compose*
+installieren und zwar:
 
-https://github.com/jbarlow83/OCRmyPDF
-https://ocrmypdf.readthedocs.io/en/latest/introduction.html
-https://github.com/tesseract-ocr/tesseract
+``` bash
+mkdir ocrmypdf
+cd ocrmypdf
+touch docker-compose.yml
+```
+Die *docker-compose.yml* wird mit folgendem Inhalt gefüllt:
+``` yaml
+version: "3.3"
+services:
+  ocrmypdf:
+    restart: always
+    container_name: ocrmypdf
+    image: jbarlow83/ocrmypdf
+    volumes:
+      - "PFAD_ZUM_INPUT_FOLODER:/input"
+      - "PFAD_ZUM_OUTPUT_FOLDER:/output"
+    environment:
+      - OCR_OUTPUT_DIRECTORY_YEAR_MONTH=1
+      - OCR_ON_SUCCESS_DELETE=1 
+      - OCR_DESKEW=1
+      - PYTHONUNBUFFERED=1
+      - WATCHER_CHMOD=664
+    entrypoint: python3
+    command: watcher.py
+```
 
-Ich verwende *docker* und *docker-compose*:
+**Wichtig** die Datei muss *docker-compose.yml* heißen. Etwas mehr Dokumentation
+findet man bei
+[ocrmypdf](https://ocrmypdf.readthedocs.io/en/latest/batch.html#hot-watched-folders)
+selbst. Natürlich muss `PFAD_ZUM_INPUT_FOLODER` und `PFAD_ZUM_OUTPUT_FOLDER` den
+eigenen Bedürfnissen angepasst werden. `OCR_OUTPUT_DIRECTORY_YEAR_MONTH=1` sorgt
+dafür, dass Jahres und Monatsweise Ordner erstellt werden.
+`OCR_ON_SUCCESS_DELETE=1` löscht den original Scan nach erfolgreichem OCR,
+`OCR_DESKEW=1` korrigiert leichte Schieflagen von Dokumenten,
+`PYTHONUNBUFFERED=1` sorgt dafür, dass der Dockerlog auch alle Informationen
+enthält und `WATCHER_CHMOD=664` macht, dass alle Dateien editiert werden können.
+Sollte das nicht reichen kann man auch `WATCHER_CHMOD=666` vergeben, damit
+sollte es in jedem falle gehen. Die kryptische Zahl `664` oder `666` ist ein
+[octet](https://wiki.ubuntuusers.de/chmod/#Beispiele-2). `restart=always`
+bedeutet, dass der Container immer ausgeführt wird. Auch automatisch nach einem
+Neustart.
 
-# 3 Schritt: Rechte reparieren
+Das Ganze wird aktiviert mit: 
 
-Das Problem bei docker ist, dass ocrmypdf jetzt als root läuft und darum auch
-sämtliche scans mit root als owner abgespeichert werden. Da ich aber auch datei
-verändern und verschieben können will als normaler benutzer, muss ich das
-ändern.
+``` bash
+sudo docker-compose up -d
+```
+
+das `-d` steht hierbei für *detached*. D.h. alles läuft im Hintergrund ab. Will
+man aber erst mal sehen ob es überhaupt funktioniert, kann man das `-d`
+weglassen und bekommt so den Log im Terminal angezeigt. Mit `Ctl + c` kann das
+ganze dann beendet werden.
+
+Viel Freude mit dem Setup! 
+
+Deisi
+
+
