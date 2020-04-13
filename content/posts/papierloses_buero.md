@@ -1,7 +1,7 @@
 ---
 title: "Papierloses Büro"
-date: 2020-03-14T08:00:00+01:00
-draft: true
+date: 2020-04-13T08:00:00+01:00
+draft: false
 tags: ["HowTo", "Linux"]
 ---
 
@@ -54,6 +54,7 @@ services:
   ocrmypdf:
     restart: always
     container_name: ocrmypdf
+    user: 1000:1000
     image: jbarlow83/ocrmypdf
     volumes:
       - "PFAD_ZUM_INPUT_FOLODER:/input"
@@ -63,7 +64,6 @@ services:
       - OCR_ON_SUCCESS_DELETE=1 
       - OCR_DESKEW=1
       - PYTHONUNBUFFERED=1
-      - WATCHER_CHMOD=664
     entrypoint: python3
     command: watcher.py
 ```
@@ -73,16 +73,13 @@ findet man bei
 [ocrmypdf](https://ocrmypdf.readthedocs.io/en/latest/batch.html#hot-watched-folders)
 selbst. Natürlich muss `PFAD_ZUM_INPUT_FOLODER` und `PFAD_ZUM_OUTPUT_FOLDER` den
 eigenen Bedürfnissen angepasst werden. `OCR_OUTPUT_DIRECTORY_YEAR_MONTH=1` sorgt
-dafür, dass Jahres und Monatsweise Ordner erstellt werden.
+dafür, dass jahres- und monatsweise Ordner erstellt werden.
 `OCR_ON_SUCCESS_DELETE=1` löscht den original Scan nach erfolgreichem OCR,
 `OCR_DESKEW=1` korrigiert leichte Schieflagen von Dokumenten,
 `PYTHONUNBUFFERED=1` sorgt dafür, dass der Dockerlog auch alle Informationen
-enthält und `WATCHER_CHMOD=664` macht, dass alle Dateien editiert werden können.
-Sollte das nicht reichen kann man auch `WATCHER_CHMOD=666` vergeben, damit
-sollte es in jedem falle gehen. Die kryptische Zahl `664` oder `666` ist ein
-[octet](https://wiki.ubuntuusers.de/chmod/#Beispiele-2). `restart=always`
-bedeutet, dass der Container immer ausgeführt wird. Auch automatisch nach einem
-Neustart.
+enthält und `user: 1000:1000` bewirkt, dass alle Datein vom Standarduser
+erstellt werden und nicht wie sonst root. `restart=always` bedeutet, dass der
+Container immer ausgeführt wird. Auch automatisch nach einem Neustart.
 
 Das Ganze wird aktiviert mit: 
 
@@ -98,5 +95,3 @@ ganze dann beendet werden.
 Viel Freude mit dem Setup! 
 
 Deisi
-
-
