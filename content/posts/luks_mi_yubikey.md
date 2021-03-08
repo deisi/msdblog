@@ -8,31 +8,31 @@ description: "Festplatten verschlüsselung mit Yubikeys unter Ubuntu"
 
 Ich habe jetzt vor einiger Zeit zwei Ubuntu und einen Archlinux PC auf eine
 2-Faktor-Vollverschlüsselung umgestellt. Mit dem Ergebnis bin ich bisher sehr
-zufrieden. Darum dokumentiere ich hier die Nötigen schritte. Getestet wurde
-diese Anleitung für Ubuntu 19.10.
+zufrieden. Darum dokumentiere ich hier die nötigen Schritte. Getestet wurde
+diese Anleitung für Ubuntu 19.10 und 20.04
 # Begriffe
 
 Die folgenden Begriffe sollten so ungefähr bekannt sein.
 - **[LUKS](https://wiki.archlinux.org/index.php/Dm-crypt)**: Ein System zur
-  verschlüsselung von Festplatten unter Linux.
+  Verschlüsselung von Festplatten unter Linux.
 - **[LUKS-Header](https://wiki.archlinux.org/index.php/Dm-crypt/Device_encryption#Backup_and_restore)**:
   Die wichtigste Datei einer verschlüsselten Festplatte. Hier werden die
   gültigen Passwörter zur Entschlüsselung in Keyslots abgelegt. Bis zu 8 können
   gleichzeitig aktiviert sein. **Achtung** Wird der LUKS-Header beschädigt und
   besitzt man kein Backup, sind die Daten unwiederbringlich verloren.
 - [initramfs](https://wiki.archlinux.org/index.php/Mkinitcpio): So etwas wie ein
-  kleines Filesystem, dass während des boot Vorgangs gestartet wird. Für die
-  Entschlüsselung während des boot Vorgangs müssen wir hier etwas anpassen.
+  kleines Filesystem, dass während des bootens gestartet wird. Hier muss ein
+  bisschen was angepasst werden. 
 # Vorraussetzungen
 
 Als zweiten Faktor verwende ich [yubikeys](https://www.yubico.com/) nicht ganz
 billig, aber sie tun was sie sollen. Da ich den *challenge-response* Modus für
 die Verschlüsselung verwende, muss es einer der teureren *Yubikeys* (schwarz)
 sein. Die günstigeren *Security Keys* (blau) unterstützen den challenge-response
-modus nicht und können nicht verwendet werden. [Allerdings könnte es in zukunft
+modus nicht und können nicht verwendet werden. [Allerdings könnte es in Zukunft
 möglich sein LUKS mit FIDO2 zu verwenden.](https://github.com/shimunn/fido2luks)
 Dann wären auch die blauen keys okay, aber bisher ist das noch sehr frühes
-Entwicklungsstadium und Fedora only glaube ich. Es empfiehlt sich sogar 2 bis 3
+Entwicklungsstadium und Fedora only. Es empfiehlt sich sogar 2 bis 3
 dieser Keys zu kaufen, da man so auch einen verlieren kann ohne gleich komplett
 angeschmiert zu sein.
 
