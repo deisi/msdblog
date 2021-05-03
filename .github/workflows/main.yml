@@ -1,0 +1,32 @@
+name: CI
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Update theme
+        run: git submodule update --init --recursive
+
+      - name: Setup hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.80.0"
+
+      - name: Build
+        run: hugo
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.BLOG }}
+          external_repository: deisi/deisi.github.io
+          publish_dir: ./public
+          #   keep_files: true
+          user_name: deisi
+          user_email: mdeiseroth88@gmail.com
+          publish_branch: master
+        #   cname: example.com
+
