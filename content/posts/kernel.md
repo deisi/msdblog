@@ -44,7 +44,7 @@ make olddefconfig
 ```
 
 Für den kernel geht das gute alte (Linus will es so) `make` und `make install`.
-Ich persönlich versuche aber möglichst wenig an meinem Paktemanager vorbei zu
+Ich persönlich versuche aber möglichst wenig an meinem Paketmanager vorbei zu
 installieren. Auf lange Sicht macht das nur Stress. Zum Glück ist es beim Kernel
 super einfach ein `.deb` Paket zu bauen:
 
@@ -96,6 +96,6 @@ Hier natürlich aufpassen, dass man die richtige Version deinstalliert, da man j
 jetzt mindestens zwei Kernel im System hat. Ich würde keinem empfehlen den
 Default Kernel zu deinstallieren.
 
-Viel spaß mit dem Setup
+Viel Spaß mit dem Setup
 Deisi
 

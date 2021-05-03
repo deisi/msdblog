@@ -1,4 +1,4 @@
----
+--
 title: "Daten Statt Nachrichten"
 date: 2020-02-11T17:54:03+01:00
 draft: false
@@ -8,7 +8,7 @@ description: "Daten statt blabla"
 ---
 
 Mich stört immer mehr die Informationsauswahl bei redaktionellen Inhalten.
-Versteht mich jetzt nicht falsch, ich will hier nicht die Mähr von der
+Versteht mich jetzt nicht falsch, ich will hier nicht die Mär von der
 "Lügenpresse" nähren. Aber es ist leider so, dass Nachrichten kein
 repräsentatives Bild der Realität zeichnen. Stattdessen sind Katastrophen und
 Probleme überrepräsentiert und Erfolge und positives unterrepräsentiert. Das

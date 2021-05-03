@@ -1,4 +1,4 @@
----
+--
 title: "Zwei Faktor Authentifizierung (2FA) mit SSH"
 date: 2019-01-08T18:47:05+01:00
 draft: false
@@ -48,7 +48,7 @@ zack läuft das Ding schon mal auf eurem Handy.
 
 ## 2. Aktivieren des Moduls
 
-Als nächstes muss noch das Modul für die SSH verbindung aktiviert werden.
+Als nächstes muss noch das Modul für die SSH Verbindung aktiviert werden.
 Hierfür müssen zwei Dateien editiert werden. In der `/etc/pam.d/sshd`
 
 ```config

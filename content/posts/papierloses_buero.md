@@ -77,7 +77,7 @@ dafür, dass jahres- und monatsweise Ordner erstellt werden.
 `OCR_ON_SUCCESS_DELETE=1` löscht den original Scan nach erfolgreichem OCR,
 `OCR_DESKEW=1` korrigiert leichte Schieflagen von Dokumenten,
 `PYTHONUNBUFFERED=1` sorgt dafür, dass der Dockerlog auch alle Informationen
-enthält und `user: 1000:1000` bewirkt, dass alle Datein vom Standarduser
+enthält und `user: 1000:1000` bewirkt, dass alle Dateien vom Standarduser
 erstellt werden und nicht wie sonst root. `restart=always` bedeutet, dass der
 Container immer ausgeführt wird. Auch automatisch nach einem Neustart.
 
@@ -87,7 +87,7 @@ Das Ganze wird aktiviert mit:
 sudo docker-compose up -d
 ```
 
-das `-d` steht hierbei für *detached*. D.h. alles läuft im Hintergrund ab. Will
+`-d` steht hierbei für *detached*. D.h. alles läuft im Hintergrund ab. Will
 man aber erst mal sehen ob es überhaupt funktioniert, kann man das `-d`
 weglassen und bekommt so den Log im Terminal angezeigt. Mit `Ctl + c` kann das
 ganze dann beendet werden.
