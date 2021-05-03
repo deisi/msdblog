@@ -1,6 +1,6 @@
 ---
 title: "Testkernel kompilieren"
-date: 2021-03-08T08:00:00+01:00
+date: 2021-05-03T08:00:00+01:00
 tags: ["HowTo", "Kernel"]
 description: "Kernel selbst kompilieren"
 ---
@@ -48,7 +48,7 @@ Ich persönlich versuche aber möglichst wenig an meinem Paktemanager vorbei zu
 installieren. Auf lange Sicht macht das nur Stress. Zum Glück ist es beim Kernel
 super einfach ein `.deb` Paket zu bauen:
 
-```
+```bash
 make -j 10 bindeb-pkg
 ```
 
@@ -63,7 +63,7 @@ Ergebnis von obigem `make` sind dann 4 `.deb` Dateien. Allerdings landen diese
 Dateien eine Ordner ebene höher. Darum auch der Initiale `kernel` Ordner im
 ersten Befehl. `ls ..` zeigt jetzt also u.a.:
 
-```
+```bash
 linux-headers-X_X-Y_amd64.deb
 linux-image-X_X-Y_amd64.deb
 linux-image-X-dbg_X-Y_amd64.deb
@@ -74,7 +74,7 @@ X und Y sind hierbei spezifische versionsnummern. X ergibt sich aus der
 Kernelversionsnummer und Y ist eine Buildnummer.
 
 Das Ergebnis kann jetzt installiert und verwendet werden:
-```
+```bash
 sudo dpkg -i linux-headers-X_X-Y_amd64.deb linux-image-X_X-Y_amd64.deb
 ```
 
@@ -88,11 +88,14 @@ wird über die neue Version informiert. Das simple `make install` kümmert sich
 zwar auch um grub, aber `dkms` module sind danach oft kaputt.
 
 Will man den neuen Kernel wieder los werden, kann man ihn mit apt wieder deinstallieren.
-```
+```bash
 sudo apt remove linux-headers-X  linux-image-X
 ```
 
 Hier natürlich aufpassen, dass man die richtige Version deinstalliert, da man ja
 jetzt mindestens zwei Kernel im System hat. Ich würde keinem empfehlen den
 Default Kernel zu deinstallieren.
+
+Viel spaß mit dem Setup
+Deisi
 
