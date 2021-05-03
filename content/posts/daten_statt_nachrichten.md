@@ -1,4 +1,4 @@
---
+---
 title: "Daten Statt Nachrichten"
 date: 2020-02-11T17:54:03+01:00
 draft: false
