@@ -1,8 +1,8 @@
 ---
 title: "LUKS mit Yubikey"
-date: 2020-03-03T08:00:00+01:00
-draft: true
-tags: ["Security", "HowTo"]
+date: 2020-03-10T08:00:00+01:00
+draft: false
+tags: ["Security", "HowTo", "Linux"]
 description: "Festplatten verschlüsselung mit Yubikeys unter Ubuntu"
 ---
 
@@ -85,8 +85,7 @@ Für Ubuntu gibt es eine
 sudo add-apt-repository ppa:yubico/stable && sudo apt-get update
 sudo apt-get install yubikey-manager-qt
 ```
-Unter `Applications -> OTP` z.b. den zweiten Slot des Yubikey, in den challenge
-response Modus versetzen. Am Ende sollte es in Yubikey Manager etwa so aus sehen
+Unter `Applications -> OTP` z.b. den zweiten Slot des Yubikey, in den challenge-response-modus versetzen. Am Ende sollte es in Yubikey Manager etwa so aus sehen
 
 ![img](/yubikey/yubikey_manager.png)
 
@@ -132,7 +131,7 @@ Vielleicht hilft ein Blick auf https://github.com/cornelinux/yubikey-luks
 
 # Bonus Schritt 4: Das alte einfache Passwort löschen.
 
-Wärend der Installation benutze ich ein einfaches passwort um die Festplatte zu
+Während der Installation benutze ich ein einfaches Passwort um die Festplatte zu
 verschlüsseln, da man es doch ein paar mal eingeben muss. Dieses Passwort sollte
 man entweder deaktivieren, oder durch ein möglichst langes anderes Passwort
 ersetzen. Ich empfehle letzteres. Man schwächt zwar seine 2-Faktor
@@ -161,7 +160,7 @@ und gibt das **zu löschende** Passwort an. Für mehr Optionen lohnt [hier](http
 
 # Bonus Schritt 5: Ein Backup des LUKS-Header erstellen.
 Der LUKS-Header ist ein *single point of failure*. Darum sollte man unbedingt
-ein backup vom LUKS-Header erstellen. Allerdings erst nachdem die finale Version
+ein Backup vom LUKS-Header erstellen. Allerdings erst nachdem die finale Version
 der Keys dort abgelegt worden ist. Ansonsten kann jemand, der über den alten
 LUKS-Header verfügt, diesen benutzen um die Festplatte mit dem schwachen
 Passwort aus der Installation zu entschlüsseln.
@@ -172,15 +171,15 @@ sudo cryptsetup luksHeaderBackup /dev/<device> --header-backup-file /mnt/<backup
 
 reicht dafür. Siehe
 [hier](https://wiki.archlinux.org/index.php/Dm-crypt/Device_encryption#Backup_and_restore)
-für nähere Informationen. Wo und wie man das backup am besten speichert ist ein
+für nähere Informationen. Wo und wie man das Backup am besten speichert ist ein
 Problem für sich. Ich habe es so gemacht, dass ich 3 verschlüsselte Rechner habe
-und auf jedem ist ein Backup sämtlicher LUKS-header aller drei Systeme.
+und auf jedem ist ein Backup sämtlicher LUKS-Header aller drei Systeme.
 
-# Bonus Schritt 6: Automatisches login aktivieren.
+# Bonus Schritt 6: Automatisches Login aktivieren.
 Nervig ist, dass man jetzt beim booten nach zwei Passwörtern gefragt wird. Das
-für die Verschlüsselung der Festplatten und dass für den User login. Da ich eh
+für die Verschlüsselung der Festplatten und dass für den User Login. Da ich eh
 nur einen User habe, und meine Festplatte ja verschlüsselt ist, habe ich den
-User login deaktiviert. Das geht bei Ubuntu über die GUI unter *Settings >
+User Login deaktiviert. Das geht bei Ubuntu über die GUI unter *Settings >
 Details > Users* und dann die Checkbox *Automatic Login*. Im Deutschen heißen
 sie Sachen Wahrscheinlich *Systemeinstellungen > Details > Benutzer >
 Automatischer Login* oder so ähnlich.
@@ -190,11 +189,10 @@ dem Passwort für die Keychain gefragt. Standard mäßig ist das gleich dem User
 Passwort. IMO kann man auch auf dieses Passwort verzichten. Dazu muss ein leeres
 Passwort eingegeben werden:
 
-
 ![seahorse](/yubikey/seahorse.png) Starte oder installiere falls nötig das
-Programm `seahorse`. Am linken Rand mit rechter Maustaste auf Login das Passwort
-ändern. Dazu erst das alte User-Passwort eingeben und dann für das Neue leer
-lassen.
+Programm `seahorse`. Bei Ubuntu taucht es auch als *Passwords and Keys* auf. Am
+linken Rand mit rechter Maustaste auf Login das Passwort ändern. Dazu erst das
+alte User-Passwort eingeben und dann für das Neue leer lassen.
 
 Viel Freude mit dem Setup! 
 

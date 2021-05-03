@@ -1,6 +1,6 @@
 ---
 title: "Verschlüsselung mittels PLZ bei einer Bank!?!"
-date: 2020-02-28T08:30:00+01:00
+date: 2020-03-01T08:30:00+01:00
 tags: ["Security"]
 description: "Banken verschlüsseln mit PLZ..."
 
