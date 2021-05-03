@@ -9,8 +9,6 @@ jobs:
 
       - name: Update theme
         run: git submodule update --init --recursive
-        with:
-          personal_token: ${{ secrets.BLOG }}
 
       - name: Setup hugo
         uses: peaceiris/actions-hugo@v2
